@@ -3,21 +3,30 @@ document.getElementById('btn-withdraw').addEventListener('click', function () {
     const newWithDrawAmountString = withdrawField.value;
     const newWithDrawAmount = parseFloat(newWithDrawAmountString);
 
-    const withDrawTotalElement = document.getElementById('withdraw-total');
-    const previousWithdrawTotalString = withDrawTotalElement.innerText;
-    const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
+    withdrawField.value = '';
+    if (isNaN(newWithDrawAmount)) {
+        alert('Please provide a valid number');
+        return;
+    }
 
-    const currentWithdrawTotal = previousWithdrawTotal + newWithDrawAmount;
-    withDrawTotalElement.innerText = currentWithdrawTotal;
-
+    const withdrawTotalElement = document.getElementById('withdraw-total');
+    const previousWIthDrawTotalString = withdrawTotalElement.innerText;
+    const previousWIthDrawTotal = parseFloat(previousWIthDrawTotalString);
 
     const balanceTotalElement = document.getElementById('balance-total');
-    const previousBalanceTotalString = balanceTotalElement.innerText;
-    const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+    const newWithdrawBalanceString = balanceTotalElement.innerText;
+    const newWithdrawBalance = parseFloat(newWithdrawBalanceString);
 
-    const newBalanceTotal = previousBalanceTotal - newWithDrawAmount;
-    balanceTotalElement.innerText = newBalanceTotal;
+    if (newWithDrawAmount > newWithdrawBalance) {
+        alert('amar bank a eto taka nai');
+        return;
+    }
+
+    const totalWithdrawAmount = newWithDrawAmount + previousWIthDrawTotal;
+    withdrawTotalElement.innerText = totalWithdrawAmount;
 
 
-    withdrawField.value = '';
+    const totalBalanceWithdrawAmount = newWithdrawBalance - newWithDrawAmount;
+    balanceTotalElement.innerText = totalBalanceWithdrawAmount;
+
 })
